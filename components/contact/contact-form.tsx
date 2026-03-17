@@ -101,7 +101,8 @@ export function ContactForm() {
         },
         body: JSON.stringify(formData)
       })
-      console.log(response, "sub-resp");
+      const result = await response.json()
+      console.log(result)
       if (!response.ok) {
         throw new Error("Failed to submit form")
       }
@@ -159,217 +160,217 @@ export function ContactForm() {
   }
 
   return (
- <section className="py-16 bg-background" ref={ref}>
-  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-16 bg-background" ref={ref}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
-    {/* Section Heading */}
-    <div className={`text-center mb-24 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-      <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-        Get In Touch
-      </h2>
-
-      <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-        Contact Connect Loans for expert loan guidance and eligibility support.
-        <br />
-        Our team is here to help you find the right financial solution.
-      </p>
-    </div>
-
-    {/* MAIN GRID */}
-    <div className="grid lg:grid-cols-2 gap-16 items-start">
-
-      {/* LEFT SIDE */}
-      <div className="max-w-lg w-full px-6 lg:px-8">
-
-        <div className={`mb-10 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Send Us a Message
+        {/* Section Heading */}
+        <div className={`text-center mb-24 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+          <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+            Get In Touch
           </h2>
 
-          <p className="mt-3 text-muted-foreground">
-            Have a question about our loan services? Fill out the form below and our team will get back to you.
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+            Contact Connect Loans for expert loan guidance and eligibility support.
+            <br />
+            Our team is here to help you find the right financial solution.
           </p>
         </div>
 
-        {/* CONTACT DETAILS */}
-        <div className="space-y-8">
+        {/* MAIN GRID */}
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-          {contactDetails.map((contact, index) => (
-            <div
-              key={contact.title}
-              className={`${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
+          {/* LEFT SIDE */}
+          <div className="max-w-lg w-full px-6 lg:px-8">
 
-              <div className="flex items-start gap-4">
+            <div className={`mb-10 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                Send Us a Message
+              </h2>
 
-                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <contact.icon className="h-5 w-5 text-primary" />
-                </div>
+              <p className="mt-3 text-muted-foreground">
+                Have a question about our loan services? Fill out the form below and our team will get back to you.
+              </p>
+            </div>
 
-                <div>
-                  <h3 className="font-semibold text-foreground">
-                    {contact.title}
-                  </h3>
+            {/* CONTACT DETAILS */}
+            <div className="space-y-8">
 
-                  <div className="mt-1 space-y-1">
-                    {contact.details.map((detail) =>
-                      contact.href ? (
-                        <Link
-                          key={detail}
-                          href={contact.href}
-                          className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          {detail}
-                        </Link>
-                      ) : (
-                        <p key={detail} className="text-sm text-muted-foreground">
-                          {detail}
-                        </p>
-                      )
-                    )}
+              {contactDetails.map((contact, index) => (
+                <div
+                  key={contact.title}
+                  className={`${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+
+                  <div className="flex items-start gap-4">
+
+                    <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <contact.icon className="h-5 w-5 text-primary" />
+                    </div>
+
+                    <div>
+                      <h3 className="font-semibold text-foreground">
+                        {contact.title}
+                      </h3>
+
+                      <div className="mt-1 space-y-1">
+                        {contact.details.map((detail) =>
+                          contact.href ? (
+                            <Link
+                              key={detail}
+                              href={contact.href}
+                              className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              {detail}
+                            </Link>
+                          ) : (
+                            <p key={detail} className="text-sm text-muted-foreground">
+                              {detail}
+                            </p>
+                          )
+                        )}
+                      </div>
+
+                    </div>
+
                   </div>
 
+                </div>
+              ))}
+
+            </div>
+
+          </div>
+
+          {/* RIGHT SIDE FORM */}
+          <div className="w-full px-8 lg:px-8">
+
+            <form
+              onSubmit={handleSubmit}
+              className={`bg-card rounded-2xl p-8 border border-border ${isVisible ? "animate-fade-in-up animation-delay-200" : "opacity-0"}`}
+            >
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* Full Name */}
+                <div className="space-y-2 md:col-span-2">
+                  <label htmlFor="fullName" className="text-sm font-medium text-foreground">
+                    Full Name <span className="text-destructive">*</span>
+                  </label>
+
+                  <Input
+                    id="fullName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    value={formData.fullName}
+                    onChange={(e) => handleChange("fullName", e.target.value)}
+                    className={errors.fullName ? "border-destructive" : ""}
+                  />
+
+                  {errors.fullName && (
+                    <p className="text-xs text-destructive">{errors.fullName}</p>
+                  )}
+                </div>
+
+                {/* Email */}
+                <div className="space-y-2 md:col-span-2">
+                  <label htmlFor="email" className="text-sm font-medium text-foreground">
+                    Email Address <span className="text-destructive">*</span>
+                  </label>
+
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={formData.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    className={errors.email ? "border-destructive" : ""}
+                  />
+
+                  {errors.email && (
+                    <p className="text-xs text-destructive">{errors.email}</p>
+                  )}
+                </div>
+
+                {/* Subject */}
+                <div className="space-y-2 md:col-span-2">
+                  <label htmlFor="subject" className="text-sm font-medium text-foreground">
+                    Loan Type / Enquiry Topic <span className="text-destructive">*</span>
+                  </label>
+
+                  <Select
+                    value={formData.subject}
+                    onValueChange={(value) => handleChange("subject", value)}
+                  >
+                    <SelectTrigger className={`w-full ${errors.subject ? "border-destructive" : ""}`}>
+                      <SelectValue placeholder="Select enquiry topic" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      {enquiryTopics.map((topic) => (
+                        <SelectItem key={topic} value={topic}>
+                          {topic}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  {errors.subject && (
+                    <p className="text-xs text-destructive">{errors.subject}</p>
+                  )}
+                </div>
+
+                {/* Message */}
+                <div className="space-y-2 md:col-span-2">
+                  <label htmlFor="message" className="text-sm font-medium text-foreground">
+                    Loan Requirement Details <span className="text-destructive">*</span>
+                  </label>
+
+                  <Textarea
+                    id="message"
+                    rows={5}
+                    placeholder="Please describe your loan requirements, questions, or any specific details you'd like to discuss..."
+                    value={formData.message}
+                    onChange={(e) => handleChange("message", e.target.value)}
+                    className={errors.message ? "border-destructive" : ""}
+                  />
+
+                  {errors.message && (
+                    <p className="text-xs text-destructive">{errors.message}</p>
+                  )}
                 </div>
 
               </div>
 
-            </div>
-          ))}
+              <div className="mt-8">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
+                </Button>
+              </div>
+
+              <p className="mt-4 text-xs text-center text-muted-foreground">
+                By submitting this form, you agree that Connect Loans may contact you regarding loan assistance and financial consultation services.
+              </p>
+
+            </form>
+
+          </div>
 
         </div>
 
       </div>
-
-      {/* RIGHT SIDE FORM */}
-      <div className="w-full px-8 lg:px-8">
-
-        <form
-          onSubmit={handleSubmit}
-          className={`bg-card rounded-2xl p-8 border border-border ${isVisible ? "animate-fade-in-up animation-delay-200" : "opacity-0"}`}
-        >
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            {/* Full Name */}
-            <div className="space-y-2 md:col-span-2">
-              <label htmlFor="fullName" className="text-sm font-medium text-foreground">
-                Full Name <span className="text-destructive">*</span>
-              </label>
-
-              <Input
-                id="fullName"
-                type="text"
-                placeholder="Enter your full name"
-                value={formData.fullName}
-                onChange={(e) => handleChange("fullName", e.target.value)}
-                className={errors.fullName ? "border-destructive" : ""}
-              />
-
-              {errors.fullName && (
-                <p className="text-xs text-destructive">{errors.fullName}</p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div className="space-y-2 md:col-span-2">
-              <label htmlFor="email" className="text-sm font-medium text-foreground">
-                Email Address <span className="text-destructive">*</span>
-              </label>
-
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email address"
-                value={formData.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-                className={errors.email ? "border-destructive" : ""}
-              />
-
-              {errors.email && (
-                <p className="text-xs text-destructive">{errors.email}</p>
-              )}
-            </div>
-
-            {/* Subject */}
-            <div className="space-y-2 md:col-span-2">
-              <label htmlFor="subject" className="text-sm font-medium text-foreground">
-                Loan Type / Enquiry Topic <span className="text-destructive">*</span>
-              </label>
-
-              <Select
-                value={formData.subject}
-                onValueChange={(value) => handleChange("subject", value)}
-              >
-                <SelectTrigger className={`w-full ${errors.subject ? "border-destructive" : ""}`}>
-                  <SelectValue placeholder="Select enquiry topic" />
-                </SelectTrigger>
-
-                <SelectContent>
-                  {enquiryTopics.map((topic) => (
-                    <SelectItem key={topic} value={topic}>
-                      {topic}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {errors.subject && (
-                <p className="text-xs text-destructive">{errors.subject}</p>
-              )}
-            </div>
-
-            {/* Message */}
-            <div className="space-y-2 md:col-span-2">
-              <label htmlFor="message" className="text-sm font-medium text-foreground">
-                Loan Requirement Details <span className="text-destructive">*</span>
-              </label>
-
-              <Textarea
-                id="message"
-                rows={5}
-                placeholder="Please describe your loan requirements, questions, or any specific details you'd like to discuss..."
-                value={formData.message}
-                onChange={(e) => handleChange("message", e.target.value)}
-                className={errors.message ? "border-destructive" : ""}
-              />
-
-              {errors.message && (
-                <p className="text-xs text-destructive">{errors.message}</p>
-              )}
-            </div>
-
-          </div>
-
-          <div className="mt-8">
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                "Send Message"
-              )}
-            </Button>
-          </div>
-
-          <p className="mt-4 text-xs text-center text-muted-foreground">
-            By submitting this form, you agree that Connect Loans may contact you regarding loan assistance and financial consultation services.
-          </p>
-
-        </form>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
+    </section>
   )
 }

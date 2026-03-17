@@ -1,26 +1,76 @@
 import ExcelJS from "exceljs"
 import { supabase } from "@/lib/supabase"
+import { Resend } from "resend"
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function GET() {
+  try {
 
-  const { data } = await supabase
-    .from("loan_applications")
-    .select("*")
-console.log("Daily report triggered")
-  const workbook = new ExcelJS.Workbook()
-  const sheet = workbook.addWorksheet("Leads")
+    /* ---------------- GET TODAY'S DATE ---------------- */
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
 
-  sheet.columns = [
-    { header: "Name", key: "name" },
-    { header: "Phone", key: "phone" },
-    { header: "Email", key: "email" },
-    { header: "Loan Type", key: "loan_type" },
-    { header: "Amount", key: "loan_amount" },
-  ]
+    /* ---------------- FETCH DATA ---------------- */
+    const { data, error } = await supabase
+      .from("loan_application")
+      .select("*")
+      .gte("created_at", today.toISOString())
 
-  data?.forEach(row => sheet.addRow(row))
+    if (error) {
+      console.error("Supabase Error:", error)
+      return Response.json({ success: false, error })
+    }
 
-  const buffer = await workbook.xlsx.writeBuffer()
+    console.log("Daily report triggered")
 
-  return new Response(buffer)
+    /* ---------------- CREATE EXCEL ---------------- */
+    const workbook = new ExcelJS.Workbook()
+    const sheet = workbook.addWorksheet("Leads")
+
+    sheet.columns = [
+      { header: "First Name", key: "first_name", width: 20 },
+      { header: "Last Name", key: "last_name", width: 20 },
+      { header: "Email", key: "email", width: 30 },
+      { header: "Phone", key: "phone", width: 20 },
+      { header: "City", key: "city", width: 20 },
+      { header: "Loan Type", key: "loan_type", width: 20 },
+      { header: "Loan Amount", key: "loan_amount", width: 20 },
+      { header: "Employment Type", key: "employment_type", width: 20 },
+      { header: "Monthly Income", key: "monthly_income", width: 20 },
+      { header: "Property Type", key: "property_type", width: 20 },
+      { header: "Message", key: "message", width: 40 },
+      { header: "Created At", key: "created_at", width: 30 }
+    ]
+
+    data?.forEach((row) => {
+      sheet.addRow(row)
+    })
+
+    const buffer = await workbook.xlsx.writeBuffer()
+
+    /* ---------------- SEND EMAIL ---------------- */
+    await resend.emails.send({
+      from: `Connect Loans <${process.env.EMAIL_FROM}>`,
+      to: [process.env.EMAIL_TO as string],   // must be array
+      subject: "Daily Loan Leads Report",
+      html: `
+        <h2>Daily Loan Leads</h2>
+        <p>Attached is today's loan enquiry report.</p>
+        <p>Total Leads: ${data?.length || 0}</p>
+      `,
+      attachments: [
+        {
+          filename: "loan-leads.xlsx",
+          content: Buffer.from(buffer)  // important
+        }
+      ]
+    })
+
+    return Response.json({ success: true, count: data?.length || 0 })
+
+  } catch (error) {
+    console.error("Server Error:", error)
+    return Response.json({ success: false, error })
+  }
 }

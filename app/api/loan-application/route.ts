@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     /* ---------------- EMAIL NOTIFICATION ---------------- */
     const emailRes = await resend.emails.send({
       from: `Connect Loans <${process.env.EMAIL_FROM}>`,
-      to: process.env.EMAIL_TO!,
+      to: [process.env.EMAIL_TO!],
       replyTo: formData.email,
       subject: "New Loan Application",
       html: `

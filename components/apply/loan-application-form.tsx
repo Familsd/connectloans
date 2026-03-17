@@ -179,6 +179,9 @@ export function LoanApplicationForm() {
           {/* <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle className="h-8 w-8 text-green-600" />
           </div> */}
+           {/* <h2 className="text-2xl font-bold mt-6 mb-4">
+            Thank you
+          </h2> */}
           <img className="mx-auto flex items-center justify-center" src="/images/busrs.jpg" width="400px" alt="" />
           {/* <img src="/images/thank-you-img.jpg" className="mx-auto mt-4" alt="" /> */}
 
