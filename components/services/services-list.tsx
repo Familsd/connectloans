@@ -23,7 +23,7 @@ const services = [
     description: "Secure the perfect plot for your future home or investment with our plot purchase financing options. Build your dream home at your own pace.",
     highlights: ["Up to 80% financing", "15 year tenure", "Combo loans available"],
     idealFor: "Individuals planning to build their own home or make land investments.",
-    image: "/images/serv (2).jpg"
+    image: "/images/home (1).jpg"
     // imageComponent: PlotLoanImage,
   },
   {
@@ -43,7 +43,7 @@ const services = [
     description: "Unlock the value of your residential or commercial property for any financial need - from business expansion to personal emergencies.",
     highlights: ["Up to 70% value", "20 year tenure", "Any purpose"],
     idealFor: "Property owners needing funds for business, education, medical emergencies, or debt consolidation.",
-    image: "/images/serv (7).png"
+    image: "/images/serv (2).jpg"
     // image  Component: LAPImage,
   },
   {

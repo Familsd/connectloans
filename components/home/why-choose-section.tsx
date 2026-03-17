@@ -139,12 +139,10 @@ export function WhyChooseSection() {
           <div className={isVisible ? "animate-slide-in-left" : "opacity-0"}>
             <p className="text-sm font-medium text-accent uppercase tracking-wider">Why Choose Us</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-              Your Success is Our Priority
+              Simplifying Loans with Expert Financial Guidance
             </h2>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              At Connect Loans, we understand that every client has unique financial needs.
-              Our personalized approach ensures you get the right loan solution with the best possible terms.
-            </p>
+              At Connect Loans, we understand that every client has unique financial needs. Our experts connect you with trusted lenders to secure the right loan solution with the most competitive terms.</p>
 
             <div className="mt-10 space-y-6">
               {features.map((feature, index) => (

@@ -17,27 +17,40 @@ export async function POST(req: Request) {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: `secret=${process.env.TURNSTILE_SECRET_KEY}&response=${data.captchaToken}`
+        body: `secret=${process.env.TURNSTILE_SECRET_KEY}&response=${captchaToken}`
       }
     )
     const captchaData = await captchaRes.json()
 
     if (!captchaData.success) {
+      console.log("Captcha Response:", captchaData)
       return Response.json({ success: false, message: "Captcha failed" })
     }
     /* ---------------- DATABASE INSERT ---------------- */
     const { error } = await supabase
       .from("loan_application")
-      .insert([formData])
-
+      .insert([{
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        city: formData.city,
+        loan_type: formData.loanType,
+        loan_amount: formData.loanAmount,
+        employment_type: formData.employmentType,
+        monthly_income: formData.monthlyIncome,
+        property_type: formData.propertyType,
+        message: formData.message
+      }])
+    console.log("Insert Data:", formData)
+    console.log("Supabase Error:", error)
     if (error) {
-      console.error(error)
-      return Response.json({ success: false })
+      console.error(error, "r-err")
+     return Response.json({ success: false }, { status: 400 })
     }
-
+    console.log("im comming1");
     /* ---------------- EMAIL NOTIFICATION ---------------- */
-
-    await resend.emails.send({
+    const emailRes = await resend.emails.send({
       from: `Connect Loans <${process.env.EMAIL_FROM}>`,
       to: process.env.EMAIL_TO!,
       replyTo: formData.email,
@@ -57,8 +70,10 @@ export async function POST(req: Request) {
         <p><b>Message:</b> ${formData.message}</p>
         `
     })
-
+    console.log("im comming");
+    console.log("Email Response:", emailRes)
     return Response.json({ success: true })
+    
 
   } catch (error) {
     console.log(error);

@@ -20,9 +20,9 @@ export default function ContactPage() {
       <Header />
       <main className="pt-[73px]">
         <ContactHero />
-        <ContactSection/>
+        {/* <ContactSection/> */}
         {/* <ContactInfo /> */}
-        {/* <ContactForm /> */}
+        <ContactForm />
         <HelpCards />
         <ContactFaq />
         <ContactCta />

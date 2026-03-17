@@ -63,7 +63,7 @@ export function Footer() {
               <div className="mx-auto flex items-center">
                 <img src="/images/logo/logo (4).png" width={"40px"} alt="" />
                 <Link href="/" className="text-2xl font-bold text-foreground pl-2">
-                  Connect<span className="text-primary">Loans</span>
+                  Connect<span className="text-primary"> Loans</span>
                 </Link>
               </div>
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-58">

@@ -56,13 +56,13 @@ export function AboutValues() {
           {values.map((value, index) => (
             <div 
               key={value.title}
-              className={`bg-card rounded-2xl p-6 border border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 ${
+              className={`bg-card rounded-2xl p-6 border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 ${
                 isVisible ? "animate-fade-in-up" : "opacity-0"
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                <value.icon className="h-6 w-6 text-accent" />
+              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <value.icon className="h-6 w-6 text-primary" />
               </div>
               <h3 className="mt-4 text-lg font-semibold text-foreground">{value.title}</h3>
               <p className="mt-2 text-muted-foreground">{value.description}</p>

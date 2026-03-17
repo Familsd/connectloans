@@ -9,7 +9,7 @@ import { useCountAnimation } from "@/hooks/use-count-animation"
 const highlights = [
   "Fast Loan Processing",
   "Trusted Banking Partners",
-  "Expert Financial Guidance",
+ 
 ]
 
 
@@ -19,7 +19,7 @@ export function HeroSection() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section className="relative min-h-[calc(100vh-80px)] flex items-center overflow-hidden py-8 lg:py-20">
+    <section className="relative min-h-[calc(100vh-60px)] flex items-center overflow-hidden py-8 lg:py-20">
       {/* Background with subtle pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808020_1px,transparent_1px),linear-gradient(to_bottom,#80808020_1px,transparent_1px)] bg-[size:40px_40px]" style={{ maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)' }} />
@@ -38,7 +38,7 @@ export function HeroSection() {
               Trusted by 10,000+ Clients
             </div>
 
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl xl:text-6xl leading-[1.1] text-balance">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl xl:text-5xl leading-[1.1] text-balance">
               Trusted Loan Consultants for{" "}
               <span className="text-primary">Housing, Property & Business</span> Finance
             </h1>
@@ -78,7 +78,7 @@ export function HeroSection() {
           <div className={`relative ${isVisible ? "animate-slide-in-right animation-delay-300" : "opacity-0"}`}>
             
             <img
-              src="/images/h1 (2).png"
+              src="/images/serv (7).png"
               alt="Why Choose Us"
                className="w-full rounded-2xl "
               // className="w-full rounded-2xl shadow-lg border border-border"

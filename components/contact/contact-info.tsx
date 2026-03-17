@@ -36,7 +36,7 @@ export function ContactInfo() {
 
   return (
     <section className="py-16 bg-background" ref={ref}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className={`text-center mb-12 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
           <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Get In Touch</h2>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
@@ -77,7 +77,7 @@ export function ContactInfo() {
         </div>
 
 
-      </div>
+      </div> */}
     </section>
   )
 }

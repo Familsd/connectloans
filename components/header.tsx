@@ -34,7 +34,7 @@ export function Header() {
         <div className="flex lg:flex-1 pl-2">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="text-3xl font-bold text-foreground">
-              Connect<span className="text-primary">Loans</span>
+              Connect<span className="text-primary"> Loans</span>
             </span>
           </Link>
         </div>

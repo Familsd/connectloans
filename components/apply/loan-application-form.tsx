@@ -134,7 +134,7 @@ export function LoanApplicationForm() {
     setIsSubmitting(true)
 
     try {
-     
+
       const res = await fetch("/api/loan-application", {
         method: "POST",
         headers: {
@@ -145,6 +145,12 @@ export function LoanApplicationForm() {
           captchaToken
         }),
       })
+
+      if (!res.ok) {
+        const error = await res.text()
+        throw new Error(error)
+      }
+
       const data = await res.json()
       console.log(data, "Resp-loan");
       if (data.success) {
