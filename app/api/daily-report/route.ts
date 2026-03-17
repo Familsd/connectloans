@@ -11,11 +11,17 @@ export async function GET() {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
 
+    const start = new Date()
+    start.setHours(0, 0, 0, 0)
+
+    const end = new Date()
+    end.setHours(23, 59, 59, 999)
+
     /* ---------------- FETCH DATA ---------------- */
     const { data, error } = await supabase
       .from("loan_application")
       .select("*")
-      .gte("created_at", today.toISOString())
+      .gte("created_at", new Date(new Date().setHours(0, 0, 0, 0)).toISOString())
 
     if (error) {
       console.error("Supabase Error:", error)
@@ -46,7 +52,10 @@ export async function GET() {
     data?.forEach((row) => {
       sheet.addRow(row)
     })
-
+    if (!data || data.length === 0) {
+      console.log("No leads today. Skipping email.")
+      return Response.json({ success: true, message: "No leads today" })
+    }
     const buffer = await workbook.xlsx.writeBuffer()
 
     /* ---------------- SEND EMAIL ---------------- */
@@ -66,6 +75,7 @@ export async function GET() {
         }
       ]
     })
+
 
     return Response.json({ success: true, count: data?.length || 0 })
 
