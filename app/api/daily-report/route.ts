@@ -5,37 +5,38 @@ import { Resend } from "resend"
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function GET() {
+
   try {
 
-    /* ---------------- GET TODAY'S DATE ---------------- */
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
+    if (!process.env.EMAIL_TO || !process.env.EMAIL_FROM) {
+      return Response.json({
+        success: false,
+        message: "Email env variables missing"
+      })
+    }
 
-    const start = new Date()
-    start.setHours(0, 0, 0, 0)
-
-    const end = new Date()
-    end.setHours(23, 59, 59, 999)
-
-    /* ---------------- FETCH DATA ---------------- */
-    // const { data, error } = await supabase
-    //   .from("loan_application")
-    //   .select("*")
-    //   .gte("created_at", new Date(new Date().setHours(0, 0, 0, 0)).toISOString())
+    /* ---------------- FETCH NEW LEADS ---------------- */
 
     const { data, error } = await supabase
       .from("loan_application")
       .select("*")
-      .limit(10)
+      .eq("report_sent", false)
+      .order("created_at", { ascending: true })
+      .limit(100)
 
     if (error) {
-   //   console.error("Supabase Error:", error)
       return Response.json({ success: false, error })
     }
 
-    //console.log("Daily report triggered")
+    if (!data || data.length === 0) {
+      return Response.json({
+        success: true,
+        message: "No new leads"
+      })
+    }
 
     /* ---------------- CREATE EXCEL ---------------- */
+
     const workbook = new ExcelJS.Workbook()
     const sheet = workbook.addWorksheet("Leads")
 
@@ -54,38 +55,62 @@ export async function GET() {
       { header: "Created At", key: "created_at", width: 30 }
     ]
 
-    data?.forEach((row) => {
-      sheet.addRow(row)
-    })
-    if (!data || data.length === 0) {
-     // console.log("No leads today. Skipping email.")
-      return Response.json({ success: true, message: "No leads today" })
-    }
+    data.forEach((row) => sheet.addRow(row))
+
     const buffer = await workbook.xlsx.writeBuffer()
 
     /* ---------------- SEND EMAIL ---------------- */
-    await resend.emails.send({
+
+    const email = await resend.emails.send({
       from: `Connect Loans <${process.env.EMAIL_FROM}>`,
-      to: [process.env.EMAIL_TO as string],   // must be array
-      subject: "Daily Loan Leads Report",
+      to: [process.env.EMAIL_TO],
+      subject: `Loan Leads Report (${data.length})`,
       html: `
-        <h2>Daily Loan Leads</h2>
-        <p>Attached is today's loan enquiry report.</p>
-        <p>Total Leads: ${data?.length || 0}</p>
+        <h2>New Loan Leads</h2>
+        <p>Total New Leads: <strong>${data.length}</strong></p>
       `,
       attachments: [
         {
           filename: "loan-leads.xlsx",
-          content: Buffer.from(buffer)  // important
+          content: Buffer.from(buffer)
         }
       ]
     })
 
+    if (!email?.data?.id) {
+      return Response.json({
+        success: false,
+        message: "Email sending failed"
+      })
+    }
 
-    return Response.json({ success: true, count: data?.length || 0 })
+    /* ---------------- MARK LEADS SENT ---------------- */
+
+    const { error: updateError } = await supabase
+      .from("loan_application")
+      .update({ report_sent: true })
+      .in("id", data.map((row) => row.id))
+
+    if (updateError) {
+      return Response.json({
+        success: false,
+        message: "Failed to update report status",
+        updateError
+      })
+    }
+
+    return Response.json({
+      success: true,
+      sent: data.length
+    })
 
   } catch (error) {
-   // console.error("Server Error:", error)
-    return Response.json({ success: false, error })
+
+    return Response.json({
+      success: false,
+      error
+    })
+
   }
+
 }

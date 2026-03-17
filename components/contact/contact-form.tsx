@@ -188,7 +188,7 @@ export function ContactForm() {
               </h2>
 
               <p className="mt-3 text-muted-foreground">
-                Have a question about our loan services? Fill out the form below and our team will get back to you.
+                Have a question about our loan services? Fill out the form. <br /> our team will get back to you.
               </p>
             </div>
 

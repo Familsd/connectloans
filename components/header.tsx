@@ -30,9 +30,9 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 py-2 lg:px-8">
-          <img src="/images/logo/logo (4).png" width={"54px"} alt="" />
         <div className="flex lg:flex-1 pl-2">
-          <Link href="/" className="-m-1.5 p-1.5">
+        <img src="/images/logo/logo (4).png" width={"54px"} alt="" />
+          <Link href="/" className="-m-1.5 p-1.5 pl-5 flex items-center">
             <span className="text-3xl font-bold text-foreground">
               Connect<span className="text-primary"> Loans</span>
             </span>
@@ -83,11 +83,12 @@ export function Header() {
           onClick={() => setMobileMenuOpen(false)}
         />
 
-        <div className="fixed top-0 right-0 z-50 h-full w-[320px] bg-background shadow-2xl px-6 py-6 shadow-xl sm:ring-1 sm:ring-border">
-          <div className="flex items-center justify-between">
+        <div className="fixed top-0 right-0 z-50 h-full w-[320px] bg-background/90 shadow-2xl px-6 py-6 shadow-xl sm:ring-1 sm:ring-border">
+          <div className="flex items-center justify-evenly">
+            <img src="/images/logo/logo (4).png" width={"34px"} alt="" />
             <Link href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
               <span className="text-2xl font-bold text-foreground">
-                Connect<span className="text-primary">Loans</span>
+                Connect<span className="text-primary"> Loans</span>
               </span>
             </Link>
             <button
@@ -99,17 +100,17 @@ export function Header() {
               <X className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-7 flow-root">
+          <div className="mt-7 flow-root h-full">
             <div className="-my-5 divide-y divide-border">
-              <div className="space-y-3 py-6 fixed right-0 bg-background shadow-2xl w-[320px] px-6 py-6 shadow-xl sm:ring-1 sm:ring-border">
+              <div className="space-y-3 py-6 fixed right-0 bg-primary/40 rounded-b-xl shadow-2xl w-[320px] px-6 py-6 shadow-xl sm:ring-1 sm:ring-border h-screen">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     className={`block rounded-xl px-4 py-3 text-base font-medium transition-all
-${pathname === link.href
+                                ${pathname === link.href
                         ? "bg-primary text-primary-foreground shadow-sm"
-                        : "bg-secondary/60 text-foreground hover:bg-secondary"
+                        : "bg-secondary text-foreground hover:bg-secondary"
                       }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >

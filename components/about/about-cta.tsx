@@ -28,7 +28,7 @@ export function AboutCTA() {
               </p> */}
             </div>
             <div className="flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
-              <Button asChild size="lg" className="bg-[#ffffff] text-primary hover:bg-secondary/90 shadow-lg shadow-primary/30 group w-full sm:w-auto">
+              <Button asChild size="lg" className="bg-[#ffffff] text-primary hover:bg-card shadow-lg shadow-primary/30 group w-full sm:w-auto">
                 <Link href="/apply">
                   Apply Now
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

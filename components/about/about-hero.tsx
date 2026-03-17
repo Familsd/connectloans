@@ -22,8 +22,7 @@ export function AboutHero() {
           </h1>
 
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            For over 15 years, Connect Loans has been helping individuals and businesses navigate the complex
-            world of financing. We believe everyone deserves access to the right loan at the best terms.
+           For more than 15 years, Connect Loans has guided individuals and <br /> businesses toward the right financial solutions.
           </p>
         </div>
       </div>

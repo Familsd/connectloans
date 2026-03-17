@@ -18,6 +18,7 @@ body[data-radix-scroll-lock] {
   margin-right: 0 !important;
 }
 
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -140,4 +141,22 @@ body[data-radix-scroll-lock] {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes partner-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-partner-scroll {
+  display: flex;
+  width: max-content;
+  animation: partner-scroll 40s linear infinite;
+}
+.animate-partner-scroll:hover {
+  animation-play-state: paused;
 }
