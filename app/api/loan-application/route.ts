@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const captchaData = await captchaRes.json()
 
     if (!captchaData.success) {
-      console.log("Captcha Response:", captchaData)
+      //console.log("Captcha Response:", captchaData)
       return Response.json({ success: false, message: "Captcha failed" })
     }
     /* ---------------- DATABASE INSERT ---------------- */
@@ -42,13 +42,13 @@ export async function POST(req: Request) {
         property_type: formData.propertyType,
         message: formData.message
       }])
-    console.log("Insert Data:", formData)
-    console.log("Supabase Error:", error)
+    // console.log("Insert Data:", formData)
+    // console.log("Supabase Error:", error)
     if (error) {
-      console.error(error, "r-err")
+      // console.error(error, "r-err")
      return Response.json({ success: false }, { status: 400 })
     }
-    console.log("im comming1");
+    // // console.log("im comming1");
     /* ---------------- EMAIL NOTIFICATION ---------------- */
     const emailRes = await resend.emails.send({
       from: `Connect Loans <${process.env.EMAIL_FROM}>`,
@@ -70,13 +70,13 @@ export async function POST(req: Request) {
         <p><b>Message:</b> ${formData.message}</p>
         `
     })
-    console.log("im comming");
-    console.log("Email Response:", emailRes)
+    //  console.log("im comming");
+    // console.log("Email Response:", emailRes)
     return Response.json({ success: true })
     
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return Response.json({ success: false, message: "Server error" })
 
   }

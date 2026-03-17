@@ -102,7 +102,7 @@ export function ContactForm() {
         body: JSON.stringify(formData)
       })
       const result = await response.json()
-      console.log(result)
+      // console.log(result)
       if (!response.ok) {
         throw new Error("Failed to submit form")
       }
@@ -110,7 +110,7 @@ export function ContactForm() {
       setIsSubmitted(true)
 
     } catch (error) {
-      console.error("Submission error:", error)
+      // console.error("Submission error:", error)
       alert("Something went wrong. Please try again.")
     }
 

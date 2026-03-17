@@ -18,17 +18,22 @@ export async function GET() {
     end.setHours(23, 59, 59, 999)
 
     /* ---------------- FETCH DATA ---------------- */
+    // const { data, error } = await supabase
+    //   .from("loan_application")
+    //   .select("*")
+    //   .gte("created_at", new Date(new Date().setHours(0, 0, 0, 0)).toISOString())
+
     const { data, error } = await supabase
       .from("loan_application")
       .select("*")
-      .gte("created_at", new Date(new Date().setHours(0, 0, 0, 0)).toISOString())
+      .limit(10)
 
     if (error) {
-      console.error("Supabase Error:", error)
+   //   console.error("Supabase Error:", error)
       return Response.json({ success: false, error })
     }
 
-    console.log("Daily report triggered")
+    //console.log("Daily report triggered")
 
     /* ---------------- CREATE EXCEL ---------------- */
     const workbook = new ExcelJS.Workbook()
@@ -53,7 +58,7 @@ export async function GET() {
       sheet.addRow(row)
     })
     if (!data || data.length === 0) {
-      console.log("No leads today. Skipping email.")
+     // console.log("No leads today. Skipping email.")
       return Response.json({ success: true, message: "No leads today" })
     }
     const buffer = await workbook.xlsx.writeBuffer()
@@ -80,7 +85,7 @@ export async function GET() {
     return Response.json({ success: true, count: data?.length || 0 })
 
   } catch (error) {
-    console.error("Server Error:", error)
+   // console.error("Server Error:", error)
     return Response.json({ success: false, error })
   }
 }

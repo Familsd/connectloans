@@ -126,11 +126,11 @@ export function LoanApplicationForm() {
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
 
     e.preventDefault()
-    console.log("testing");
+      //  console.log("testing");
     if (!validateForm()) return
 
 
-    console.log(formData, "form")
+    // console.log(formData, "form")
     setIsSubmitting(true)
 
     try {
@@ -152,7 +152,7 @@ export function LoanApplicationForm() {
       }
 
       const data = await res.json()
-      console.log(data, "Resp-loan");
+      // console.log(data, "Resp-loan");
       if (data.success) {
         setIsSubmitted(true)
         // setIsSubmitting(false)

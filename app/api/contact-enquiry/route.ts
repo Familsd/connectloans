@@ -39,16 +39,16 @@ export async function POST(req: Request) {
     })
 
     if (error) {
-      console.error("Resend error:", error)
+      // console.error("Resend error:", error)
       return Response.json({ success: false, error })
     }
 
-    console.log("Email sent:", emailData)
+    // console.log("Email sent:", emailData)
 
     return Response.json({ success: true })
 
   } catch (error) {
-    console.error("Contact form error:", error)
+    // console.error("Contact form error:", error)
 
     return Response.json(
       { success: false, message: "Email failed", error },
