@@ -29,8 +29,9 @@ export function Header() {
   }, [mobileMenuOpen])
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <div className="flex lg:flex-1">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 py-2 lg:px-8">
+          <img src="/images/logo/logo (4).png" width={"54px"} alt="" />
+        <div className="flex lg:flex-1 pl-2">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="text-3xl font-bold text-foreground">
               Connect<span className="text-primary">Loans</span>
@@ -65,10 +66,10 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
-          <Link href="tel:+919876543210" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          {/* <Link href="tel:+919966520005" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <Phone className="h-4 w-4" />
-            +91 98765 43210
-          </Link>
+            +91 99665 20005
+          </Link> */}
           <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25">
             <Link href="/apply">Apply Now</Link>
           </Button>

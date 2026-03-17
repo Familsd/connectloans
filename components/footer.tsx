@@ -43,7 +43,7 @@ export function Footer() {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-primary border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto">
-                  <Link href="tel:+919876543210">
+                  <Link href="tel:+919966520005">
                     <Phone className="mr-2 h-4 w-4" />
                     Call Us
                   </Link>
@@ -60,9 +60,12 @@ export function Footer() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
             {/* Brand */}
             <div className="lg:col-span-1">
-              <Link href="/" className="text-2xl font-bold text-foreground">
-                Connect<span className="text-primary">Loans</span>
-              </Link>
+              <div className="mx-auto flex items-center">
+                <img src="/images/logo/logo (4).png" width={"40px"} alt="" />
+                <Link href="/" className="text-2xl font-bold text-foreground pl-2">
+                  Connect<span className="text-primary">Loans</span>
+                </Link>
+              </div>
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-58">
                 Your trusted loan consultancy, connecting you with the right lenders for your financial needs.              </p>
             </div>
@@ -108,19 +111,20 @@ export function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 shrink-0 mt-0.5 text-primary" />
                   <span className="text-sm text-muted-foreground">
-                    123 Financial District, Business Tower, Mumbai, India - 400001
+
+                    8-3-231/W/35/G1, SHANTHI KUTEER APTS, Yousufguda, Khairatabad, Hyderabad- 500045, Telangana
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="h-5 w-5 shrink-0 text-primary" />
-                  <Link href="tel:+919876543210" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    +91 98765 43210
+                  <Link href="tel:+919966520005" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    +91 9966520005
                   </Link>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="h-5 w-5 shrink-0 text-primary" />
-                  <Link href="mailto:info@connectloans.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    info@connectloans.com
+                  <Link href="mailto:contact@connectloans.in" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    contact@connectloans.in
                   </Link>
                 </li>
               </ul>
@@ -130,7 +134,7 @@ export function Footer() {
           <div className="mt-8 border-t border-border pt-6">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
               <p className="text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} Connect Services Pvt.Ltd. All rights reserved.
+                &copy; {new Date().getFullYear()} CONNECT SERVICES PRIVATE LIMITED. All rights reserved.
               </p>
               <p className="text-xs text-muted-foreground/70">
                 Connect Loans is a loan consultancy service. We are not a direct lender.

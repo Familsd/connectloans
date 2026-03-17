@@ -8,23 +8,28 @@ export async function POST(req: Request) {
     const data = await req.json()
 
     const clientEmail = process.env.CLIENT_EMAIL;
+    const emailFrom = process.env.EMAIL_FROM;
     if (!clientEmail) {
       throw new Error("CLIENT_EMAIL environment variable is not set");
     }
-
+    if (!emailFrom) {
+      throw new Error("EMAIL_FROM environment variable is not set");
+    }
+    console.log(clientEmail, emailFrom, "emails");
     await resend.emails.send({
-      from: "ConnectLoans <noreply@connectloans.in>",
+      from: emailFrom,
       to: clientEmail,
+      replyTo: data.email,
       subject: "New Enquiry",
       html: `
       <h2>New enquiry received</h2>
       <p>Name: ${data.fullName}</p>
       <p>Email: ${data.email}</p>
-      <p>Subject: ${data.subject}</p>
+      <p>Loan Type: ${data.subject}</p>
       <p>Message: ${data.message}</p>
     `,
     })
-
+    console.log(Response.json, Response, "resp");
     return Response.json({ success: true })
   } catch (error) {
 

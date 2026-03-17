@@ -114,10 +114,10 @@ export function LoansCarousel() {
               {loanTypes.map((loan) => (
                 <div
                   key={loan.title}
-                  className="w-full shrink-0 px-3"
+                  className="w-full shrink-0 px-3 mb-4"
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
-                  <div className="bg-card mt-2 rounded-2xl p-6 h-full border border-border hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                  <div className="bg-card mt-2  rounded-2xl p-6 h-full border border-border hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                     <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <loan.icon className="h-7 w-7 text-primary" />
                     </div>

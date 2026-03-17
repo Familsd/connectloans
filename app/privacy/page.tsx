@@ -136,7 +136,7 @@ export default function PrivacyPage() {
                   </p>
                   <div className="mt-4 text-muted-foreground">
                     <p>Email: privacy@connectloans.com</p>
-                    <p>Phone: +91 98765 43210</p>
+                    <p>Phone: +91 99665 20005</p>
                     <p>Address: 123 Financial District, Business Tower, Mumbai, India - 400001</p>
                   </div>
                 </div>

@@ -7,21 +7,21 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 const contactDetails = [
   {
     icon: Phone,
-    title: "Loan Consultation Helpline",
-    details: ["+91 98765 43210", "+91 22 1234 5678"],
-    href: "tel:+919876543210",
+    title: "Consultation Helpline",
+    details: ["+91 99665 20005"],
+    href: "tel:+919966520005",
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["support@connectloans.in", "info@connectloans.in"],
-    href: "mailto:support@connectloans.in",
+    details: ["contact@connectloans.in"],
+    href: "mailto:contact@connectloans.in",
   },
   {
     icon: MapPin,
     title: "Office Location",
-    details: ["123 Financial District", "Business Tower, Mumbai - 400001"],
-    href: "https://maps.google.com",
+    details: ["8-3-231/W/35/G1, SHANTHI KUTEER APTS, Yousufguda, Khairatabad, Hyderabad - 500045, Telangana, India"],
+    href: "https://maps.app.goo.gl/ABHTdQETqJsy29yD9",
   },
   {
     icon: Clock,
@@ -40,18 +40,17 @@ export function ContactInfo() {
         <div className={`text-center mb-12 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
           <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Get In Touch</h2>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-            Contact Connect Loans for loan consultation, eligibility guidance, and personalized financial assistance. 
+            Contact Connect Loans for loan consultation, eligibility guidance, and personalized financial assistance.
             Our experts are ready to help you.
           </p>
         </div>
-        
+
         <div className="grid grid-rows-2 md:grid-cols-2 lg:grid-rows-2 gap-6">
           {contactDetails.map((contact, index) => (
             <div
               key={contact.title}
-              className={`bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
-                isVisible ? "animate-fade-in-up" : "opacity-0"
-              }`}
+              className={`bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${isVisible ? "animate-fade-in-up" : "opacity-0"
+                }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="h-8  rounded-xl bg-primary/10 flex items-center justify-center">
@@ -76,8 +75,8 @@ export function ContactInfo() {
             </div>
           ))}
         </div>
-        
-        
+
+
       </div>
     </section>
   )

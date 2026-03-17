@@ -35,7 +35,7 @@ export function AboutCTA() {
                 </Link>
               </Button>
               {/* <Button asChild size="lg" variant="outline" className="bg-primary border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto">
-                <Link href="tel:+919876543210">
+                <Link href="tel:+919966520005">
                   <Phone className="mr-2 h-4 w-4" />
                   Call Us
                 </Link>

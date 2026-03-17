@@ -4,12 +4,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from "@/components/ui/select"
 import { CheckCircle, Loader2 } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
@@ -45,7 +45,7 @@ export function ContactForm() {
 
   const validateForm = () => {
     const newErrors: Partial<FormData> = {}
-    
+
     if (!formData.fullName.trim()) newErrors.fullName = "Full name is required"
     if (!formData.email.trim()) {
       newErrors.email = "Email is required"
@@ -54,23 +54,39 @@ export function ContactForm() {
     }
     if (!formData.subject) newErrors.subject = "Please select an enquiry topic"
     if (!formData.message.trim()) newErrors.message = "Please describe your loan requirements"
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
-    
+
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    
+
+    try {
+      const response = await fetch("/api/contact-enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      console.log(response, "sub-resp");
+      if (!response.ok) {
+        throw new Error("Failed to submit form")
+      }
+
+      setIsSubmitted(true)
+
+    } catch (error) {
+      console.error("Submission error:", error)
+      alert("Something went wrong. Please try again.")
+    }
+
     setIsSubmitting(false)
-    setIsSubmitted(true)
   }
 
   const handleChange = (field: keyof FormData, value: string) => {
@@ -91,10 +107,10 @@ export function ContactForm() {
             </div> */}
             <h2 className="mt-6 text-2xl font-bold text-foreground">Message Sent!</h2>
             <p className="mt-4 text-muted-foreground">
-              Thank you for contacting Connect Loans. Our team will review your enquiry 
+              Thank you for contacting Connect Loans. Our team will review your enquiry
               and get back to you within 24 hours.
             </p>
-            <Button 
+            <Button
               onClick={() => {
                 setIsSubmitted(false)
                 setFormData({
@@ -123,8 +139,8 @@ export function ContactForm() {
             Have a question about our loan services? Fill out the form below and our team will get back to you.
           </p>
         </div>
-        
-        <form 
+
+        <form
           onSubmit={handleSubmit}
           className={`bg-card rounded-2xl p-8 border border-border ${isVisible ? "animate-fade-in-up animation-delay-200" : "opacity-0"}`}
         >
@@ -144,7 +160,7 @@ export function ContactForm() {
               />
               {errors.fullName && <p className="text-xs text-destructive">{errors.fullName}</p>}
             </div>
-            
+
             {/* Email */}
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium text-foreground">
@@ -160,7 +176,7 @@ export function ContactForm() {
               />
               {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
             </div>
-            
+
             {/* Subject / Loan Type */}
             <div className="space-y-2 md:col-span-2">
               <label htmlFor="subject" className="text-sm font-medium text-foreground">
@@ -178,7 +194,7 @@ export function ContactForm() {
               </Select>
               {errors.subject && <p className="text-xs text-destructive">{errors.subject}</p>}
             </div>
-            
+
             {/* Message */}
             <div className="space-y-2 md:col-span-2">
               <label htmlFor="message" className="text-sm font-medium text-foreground">
@@ -195,11 +211,11 @@ export function ContactForm() {
               {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
             </div>
           </div>
-          
+
           <div className="mt-8">
-            <Button 
-              type="submit" 
-              size="lg" 
+            <Button
+              type="submit"
+              size="lg"
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25"
               disabled={isSubmitting}
             >
@@ -213,9 +229,9 @@ export function ContactForm() {
               )}
             </Button>
           </div>
-          
+
           <p className="mt-4 text-xs text-center text-muted-foreground">
-            By submitting this form, you agree that Connect Loans may contact you regarding 
+            By submitting this form, you agree that Connect Loans may contact you regarding
             loan assistance and financial consultation services.
           </p>
         </form>

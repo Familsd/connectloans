@@ -55,18 +55,29 @@ export function ProcessSection() {
         <div className="mt-16 relative">
           {/* Connection line */}
           <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-border" />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {steps.map((step, index) => (
-              <div 
+              <div
                 key={step.step}
                 className={`relative text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
+                {/* <div className="relative z-10 mx-auto h-20 w-20 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-lg group hover:bg-primary transition-colors duration-300">
+                  <step.icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors" />
+                </div> */}
                 <div className="relative z-10 mx-auto h-20 w-20 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-lg group hover:bg-primary transition-colors duration-300">
                   <step.icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors" />
+                  {index < steps.length - 0 && (
+                    <div className="hidden lg:block absolute top-24 -translate-x-1/2 -translate-y-1/2 right-[25px]">
+
+                      <div className="w-3 h-3 bg-primary rounded-full"></div>
+                    </div>
+                  )}
                 </div>
-                
+
+                {/* Arrow Connector - Desktop Only */}
+
                 <div className="mt-6">
                   <span className="text-sm font-bold text-primary">Step {step.step}</span>
                   <h3 className="mt-2 text-lg font-semibold text-foreground">{step.title}</h3>

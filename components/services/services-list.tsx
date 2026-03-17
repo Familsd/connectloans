@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import Link from "next/link"
 import { Home, MapPin, Building2, Landmark, Receipt, Briefcase, Banknote, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,7 +13,8 @@ const services = [
     description: "Make your dream of owning a home a reality with our comprehensive housing loan solutions. We connect you with top banks offering competitive interest rates and flexible repayment options.",
     highlights: ["Up to 90% financing", "30 year tenure", "From 8.5% p.a."],
     idealFor: "Salaried professionals, self-employed individuals, and NRIs looking to purchase residential property.",
-    imageComponent: HousingLoanImage,
+    image: "/images/serv (6).jpg"
+    // imageComponent: HousingLoanImage,
   },
   {
     id: "plot",
@@ -22,7 +23,8 @@ const services = [
     description: "Secure the perfect plot for your future home or investment with our plot purchase financing options. Build your dream home at your own pace.",
     highlights: ["Up to 80% financing", "15 year tenure", "Combo loans available"],
     idealFor: "Individuals planning to build their own home or make land investments.",
-    imageComponent: PlotLoanImage,
+    image: "/images/serv (2).jpg"
+    // imageComponent: PlotLoanImage,
   },
   {
     id: "industrial",
@@ -31,7 +33,8 @@ const services = [
     description: "Expand your business operations with financing for industrial properties including factories, warehouses, and commercial spaces.",
     highlights: ["High loan amounts", "Flexible tenure", "Multiple lenders"],
     idealFor: "Business owners, manufacturers, and entrepreneurs looking to expand their operational space.",
-    imageComponent: IndustrialLoanImage,
+    image: "/images/serv (1).jpg"
+    // imageComponent: IndustrialLoanImage,
   },
   {
     id: "lap",
@@ -40,7 +43,8 @@ const services = [
     description: "Unlock the value of your residential or commercial property for any financial need - from business expansion to personal emergencies.",
     highlights: ["Up to 70% value", "20 year tenure", "Any purpose"],
     idealFor: "Property owners needing funds for business, education, medical emergencies, or debt consolidation.",
-    imageComponent: LAPImage,
+    image: "/images/serv (7).png"
+    // image  Component: LAPImage,
   },
   {
     id: "lrd",
@@ -49,7 +53,8 @@ const services = [
     description: "Convert your future rental income from leased commercial properties into immediate funds for business growth.",
     highlights: ["Based on rentals", "High amounts", "Quick processing"],
     idealFor: "Commercial property owners with existing lease agreements from reputed corporate tenants.",
-    imageComponent: LRDImage,
+    image: "/images/serv (3).jpg"
+    // imageComponent: LRDImage,
   },
   {
     id: "business",
@@ -58,7 +63,8 @@ const services = [
     description: "Fuel your business growth with our range of secured and unsecured business loan options. From startups to established enterprises.",
     highlights: ["Secured & unsecured", "Quick approval", "Minimal docs"],
     idealFor: "SMEs, startups, traders, manufacturers, and service providers needing capital for growth.",
-    imageComponent: BusinessLoanImage,
+    image: "/images/serv (4).jpg"
+    // imageComponent: BusinessLoanImage,
   },
   {
     id: "working-capital",
@@ -67,11 +73,12 @@ const services = [
     description: "Maintain smooth business operations with short-term financing solutions designed to meet your day-to-day operational needs.",
     highlights: ["Cash credit", "Invoice financing", "Revolving credit"],
     idealFor: "Businesses needing funds for inventory, payroll, and day-to-day operations.",
-    imageComponent: WorkingCapitalImage,
+    image: "/images/serv9.png"
+    // imageComponent: WorkingCapitalImage,
   },
 ]
 
-// Vector illustration components
+// Vector illustration componentss
 function HousingLoanImage() {
   return (
     <svg viewBox="0 0 400 300" className="w-full h-full">
@@ -281,10 +288,10 @@ function WorkingCapitalImage() {
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const { ref, isVisible } = useScrollAnimation()
   const isEven = index % 2 === 0
-  const ImageComponent = service.imageComponent
+  // const ImageComponent = service.imageComponent
 
   return (
-    <div 
+    <div
       id={service.id}
       ref={ref}
       className={`py-16 scroll-mt-24 ${index !== 0 ? "border-border" : ""}`}
@@ -303,13 +310,26 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         {/* Image - Second on mobile, alternates on desktop */}
         <div className={`w-full ${!isEven ? "lg:order-2" : ""} ${isVisible ? (isEven ? "animate-slide-in-right" : "animate-slide-in-left") : "opacity-0"}`}>
           <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500" />
-            <div className="relative bg-card/50 backdrop-blur-sm rounded-3xl p-6 lg:p-8 border border-border/50 overflow-hidden group-hover:border-primary/30 transition-colors duration-300">
-              <div className="aspect-[7/4] w-full">
+            {/* <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500" /> */}
+            {/* <div className="relative bg-card/50 backdrop-blur-sm rounded-3xl p-6 lg:p-8 border border-border/50 overflow-hidden group-hover:border-primary/30 transition-colors duration-300"> */}
+            {/* <div className="aspect-[7/4] w-full">
                 <ImageComponent />
+                
+              </div> */}
+            <div className="absolute inset-0 transform group-hover:scale-105 transition-transform duration-500" />
+
+            <div className="relative backdrop-blur-sm  p-6 lg:p-8 overflow-hidden group-hover:border-primary/30 transition-colors duration-300">
+
+              <div className=" w-full">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-contain rounded-2xl "
+                  loading="lazy"
+                />
               </div>
               {/* Floating highlights */}
-              <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex gap-1.5 sm:gap-2 flex-wrap">
+              {/* <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex gap-1.5 sm:gap-2 flex-wrap">
                 {service.highlights.map((highlight, i) => (
                   <span 
                     key={i}
@@ -318,7 +338,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
                     {highlight}
                   </span>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -332,16 +352,16 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
             </div>
             <h2 className="text-2xl font-bold text-foreground sm:text-3xl">{service.title}</h2>
           </div>
-          
+
           <p className="text-muted-foreground leading-relaxed text-lg">
             {service.description}
           </p>
-          
+
           <div className="mt-6 p-5 bg-gradient-to-r from-secondary to-secondary/50 rounded-2xl border border-border/50">
             <p className="text-sm font-semibold text-primary uppercase tracking-wide">Ideal For</p>
             <p className="mt-2 text-foreground/80">{service.idealFor}</p>
           </div>
-          
+
           <Button asChild className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 group shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 w-full sm:w-auto">
             <Link href="/apply" className="flex items-center justify-center">
               <span className="truncate">Apply for {service.title}</span>
@@ -356,7 +376,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
 export function ServicesList() {
   return (
-    <section className="py-12 bg-background">
+    <section className="py-12 bg-[#ffffff]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {services.map((service, index) => (
           <ServiceCard key={service.id} service={service} index={index} />

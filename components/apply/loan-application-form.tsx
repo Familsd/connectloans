@@ -123,7 +123,7 @@ export function LoanApplicationForm() {
     setErrors(prev => ({ ...prev, [field]: "" }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
 
     e.preventDefault()
     console.log("testing");
@@ -134,7 +134,7 @@ export function LoanApplicationForm() {
     setIsSubmitting(true)
 
     try {
-
+     
       const res = await fetch("/api/loan-application", {
         method: "POST",
         headers: {
@@ -146,7 +146,7 @@ export function LoanApplicationForm() {
         }),
       })
       const data = await res.json()
-
+      console.log(data, "Resp-loan");
       if (data.success) {
         setIsSubmitted(true)
         // setIsSubmitting(false)
@@ -513,11 +513,12 @@ export function LoanApplicationForm() {
           <Turnstile
             sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onVerify={(token) => setCaptchaToken(token)}
+            className="mt-4 w-full flex justify-center"
           />
 
           <Button
             type="submit"
-            className="w-full mt-10 h-14 text-lg font-semibold"
+            className="flex items-center justify-center w-full mt-10 h-14 text-lg font-semibold"
             disabled={isSubmitting}
           >
 
