@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     const emailRes = await resend.emails.send({
       from: `Connect Loans <${process.env.EMAIL_FROM}>`,
       to: [process.env.EMAIL_TO!],
-      replyTo: formData.email,
+      replyTo: formData.email ? [formData.email] : undefined,
       subject: "New Loan Application",
       html: `
         <h2>New Loan Application</h2>

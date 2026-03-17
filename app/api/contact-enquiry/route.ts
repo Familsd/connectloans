@@ -24,10 +24,10 @@ export async function POST(req: Request) {
       )
     }
 
-    const email = await resend.emails.send({
+    const { data: emailData, error } = await resend.emails.send({
       from: `Connect Loans <${emailFrom}>`,
       to: [clientEmail],
-      replyTo: data.email,
+      replyTo: data.email ? [data.email] : undefined,
       subject: "New Enquiry",
       html: `
         <h2>New enquiry received</h2>
@@ -38,7 +38,12 @@ export async function POST(req: Request) {
       `
     })
 
-    console.log("Email sent:", email)
+    if (error) {
+      console.error("Resend error:", error)
+      return Response.json({ success: false, error })
+    }
+
+    console.log("Email sent:", emailData)
 
     return Response.json({ success: true })
 
