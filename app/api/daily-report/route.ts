@@ -1,3 +1,4 @@
+export const runtime = "nodejs"
 import ExcelJS from "exceljs"
 import { supabase } from "@/lib/supabase"
 import { Resend } from "resend"
@@ -7,8 +8,13 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function GET() {
 
   try {
-
-    if (!process.env.EMAIL_TO || !process.env.EMAIL_FROM) {
+    console.log("CRON STARTED", new Date().toISOString())
+    console.log("ENV CHECK", {
+      EMAIL_FROM: process.env.EMAIL_FROM,
+      CLIENT_EMAIL: process.env.CLIENT_EMAIL,
+      RESEND_API_KEY: process.env.RESEND_API_KEY ? "present" : "missing"
+    })
+    if (!process.env.CLIENT_EMAIL || !process.env.EMAIL_FROM) {
       return Response.json({
         success: false,
         message: "Email env variables missing"
@@ -23,7 +29,7 @@ export async function GET() {
       .or("report_sent.is.null,report_sent.eq.false")
       .order("created_at", { ascending: true })
 
-    console.log("Fetched leads:", data?.length,data, error)
+    console.log("Fetched leads:", data?.length, data, error)
 
     if (error) {
       return Response.json({ success: false, error })
@@ -59,7 +65,7 @@ export async function GET() {
     data.forEach((row) => sheet.addRow(row))
 
     const buffer = await workbook.xlsx.writeBuffer()
-
+    console.log("Excel buffer size:", buffer.byteLength, buffer)
     /* ---------------- SEND EMAIL ---------------- */
     const clientEmail = process.env.CLIENT_EMAIL
     const emailFrom = process.env.EMAIL_FROM
