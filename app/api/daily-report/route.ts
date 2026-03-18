@@ -20,9 +20,10 @@ export async function GET() {
     const { data, error } = await supabase
       .from("loan_application")
       .select("*")
-      .eq("report_sent", false)
+      .or("report_sent.is.null,report_sent.eq.false")
       .order("created_at", { ascending: true })
-      .limit(100)
+
+    console.log("Fetched leads:", data?.length,data, error)
 
     if (error) {
       return Response.json({ success: false, error })
@@ -84,7 +85,7 @@ export async function GET() {
       attachments: [
         {
           filename: "loan-leads.xlsx",
-            content: Buffer.from(buffer).toString("base64")
+          content: Buffer.from(buffer).toString("base64")
         }
       ]
     })
