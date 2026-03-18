@@ -102,7 +102,7 @@ export function Header() {
           </div>
           <div className="mt-7 flow-root h-full">
             <div className="-my-5 divide-y divide-border">
-              <div className="space-y-3 py-6 fixed right-0 bg-primary/40 rounded-b-xl shadow-2xl w-[320px] px-6 py-6 shadow-xl sm:ring-1 sm:ring-border h-screen">
+              <div className="space-y-3 py-6 fixed right-0 bg-primary/40 rounded-b-xl shadow-2xl w-[320px] px-6 shadow-xl sm:ring-1 sm:ring-border min-h-screen">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -117,12 +117,12 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
-              </div>
-              {/* <div className="py-6">
-                <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25">
-                  <Link href="/apply" onClick={() => setMobileMenuOpen(false)}>Apply Now</Link>
+              <div className="space-y-3 shadow-xl">
+                <Button asChild className="w-full bg-card text-primary text-lg font-semibold hover:bg-primary hover:text-primary-foreground z-10 shadow-lg shadow-primary/25">
+                  <Link href="/apply" onClick={() => setMobileMenuOpen(false)}>Apply Loan Now</Link>
                 </Button>
-              </div> */}
+              </div>
+              </div>
             </div>
           </div>
 
