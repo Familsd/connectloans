@@ -71,7 +71,7 @@ export function Header() {
             +91 99665 20005
           </Link> */}
           <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25">
-            <Link href="/apply">Apply Now</Link>
+            <Link href="/apply">Apply Loan</Link>
           </Button>
         </div>
       </nav>
@@ -119,7 +119,7 @@ export function Header() {
                 ))}
               <div className="space-y-3 shadow-xl">
                 <Button asChild className="w-full bg-card text-primary text-lg font-semibold hover:bg-primary hover:text-primary-foreground z-10 shadow-lg shadow-primary/25">
-                  <Link href="/apply" onClick={() => setMobileMenuOpen(false)}>Apply Loan Now</Link>
+                  <Link href="/apply" onClick={() => setMobileMenuOpen(false)}>Apply Loan</Link>
                 </Button>
               </div>
               </div>

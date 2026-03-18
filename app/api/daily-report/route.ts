@@ -60,10 +60,22 @@ export async function GET() {
     const buffer = await workbook.xlsx.writeBuffer()
 
     /* ---------------- SEND EMAIL ---------------- */
+    const clientEmail = process.env.CLIENT_EMAIL
+    const emailFrom = process.env.EMAIL_FROM
+
+    if (!clientEmail) {
+      throw new Error("CLIENT_EMAIL environment variable is not set")
+    }
+
+    if (!emailFrom) {
+      throw new Error("EMAIL_FROM environment variable is not set")
+    }
+
 
     const email = await resend.emails.send({
-      from: `Connect Loans <${process.env.EMAIL_FROM}>`,
-      to: [process.env.EMAIL_TO],
+
+      from: `Connect Loans <${emailFrom}>`,
+      to: [clientEmail],
       subject: `Loan Leads Report (${data.length})`,
       html: `
         <h2>New Loan Leads</h2>
@@ -72,7 +84,7 @@ export async function GET() {
       attachments: [
         {
           filename: "loan-leads.xlsx",
-          content: Buffer.from(buffer)
+            content: Buffer.from(buffer).toString("base64")
         }
       ]
     })

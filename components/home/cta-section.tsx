@@ -24,7 +24,7 @@ export function CTASection() {
             <div className="flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/30 group w-full sm:w-auto">
                 <Link href="/apply">
-                  Apply Now
+                  Apply Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>

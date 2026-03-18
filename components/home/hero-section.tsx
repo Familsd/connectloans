@@ -63,7 +63,7 @@ export function HeroSection() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 group shadow-lg shadow-primary/25 h-12 px-6 w-full sm:w-auto">
                 <Link href="/apply">
-                  Apply for Loan
+                  Apply Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
