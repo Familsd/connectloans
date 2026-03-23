@@ -29,11 +29,17 @@ export function CTASection() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-primary border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto">
+                <Link href="/partner">
+                  Become a Partner
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+              {/* <Button asChild size="lg" variant="outline" className="bg-primary border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto">
                 <Link href="tel:+919966520005">
                   <Phone className="mr-2 h-4 w-4" />
                   Call Us
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>

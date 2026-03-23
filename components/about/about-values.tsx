@@ -51,14 +51,13 @@ export function AboutValues() {
             Our core values shape every interaction and decision we make.
           </p>
         </div>
-        
+
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <div 
+            <div
               key={value.title}
-              className={`bg-card rounded-2xl p-6 border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 ${
-                isVisible ? "animate-fade-in-up" : "opacity-0"
-              }`}
+              className={`bg-card rounded-2xl p-6 border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 ${isVisible ? "animate-fade-in-up" : "opacity-0"
+                }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -69,6 +68,8 @@ export function AboutValues() {
             </div>
           ))}
         </div>
+
+       
       </div>
     </section>
   )

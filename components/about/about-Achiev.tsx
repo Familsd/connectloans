@@ -146,6 +146,46 @@ export function AboutAchiev() {
                         </div>
                     </div>
                 </div>
+                 <div className="mt-16 bg-card border rounded-2xl overflow-hidden shadow-sm">
+          <div className="grid md:grid-cols-2 items-center">
+
+            {/* LEFT IMAGE */}
+            <div className="h-full">
+              <img
+                src="/images/ser (2).jpg"
+                alt="Partner Program"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* RIGHT CONTENT */}
+            <div className="p-8">
+              <p className="text-sm font-medium text-primary uppercase tracking-wider">
+                Partner Program
+              </p>
+
+              <h3 className="mt-2 text-2xl font-semibold text-foreground">
+                Join Our Partner Network
+              </h3>
+
+              <p className="mt-3 text-muted-foreground text-sm leading-relaxed">
+                Become a part of a structured and reliable loan distribution ecosystem.
+                Access verified opportunities, streamlined processes, and dedicated support
+                designed to help you operate with confidence and consistency.
+              </p>
+
+              <div className="mt-5">
+                <a
+                  href="/partner"
+                  className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                >
+                  Apply as a Partner →
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
             </div>
         </section>
     )
