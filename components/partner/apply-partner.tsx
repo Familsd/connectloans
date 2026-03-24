@@ -65,7 +65,6 @@ export function PartnerApplicationForm() {
         return null
     }
     const sendOtp = async () => {
-
         const validationError = validateStep1()
 
         if (validationError) {
@@ -82,6 +81,7 @@ export function PartnerApplicationForm() {
             })
 
             const data = await res.json()
+            console.log("otp", data, res);
 
             if (!res.ok) throw new Error(data.error)
 
@@ -106,6 +106,8 @@ export function PartnerApplicationForm() {
             })
 
             const data = await res.json()
+
+            console.log(data, res, "Verifyotp");
 
             if (!data.valid) throw new Error("Invalid or expired OTP")
 
@@ -140,7 +142,7 @@ export function PartnerApplicationForm() {
             })
 
             const data = await res.json()
-
+            console.log(data, res, "submit");
             if (!data.success) throw new Error("Submission failed")
 
             alert(`Partner ID: ${data.partner_id}`)
@@ -326,11 +328,11 @@ export function PartnerApplicationForm() {
                             )}
 
                             {/* PRIMARY ACTION BUTTON */}
-                            {step === 1 && !otpSent && (
+                            {/* {step === 1 && !otpSent && (
                                 <Button onClick={sendOtp} disabled={sendingOtp}>
                                     {sendingOtp ? <Loader2 className="animate-spin" /> : "Send OTP"}
                                 </Button>
-                            )}
+                            )} */}
 
                             {/* {step === 1 && otpSent && (
                                 <Button onClick={verifyOtp} disabled={verifyingOtp}>

@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       .limit(1)
       .maybeSingle()
 
-    // 🔴 cooldown check
+    // cooldown check
     if (existing) {
       const last = new Date(existing.created_at).getTime()
       const now = Date.now()
@@ -38,6 +38,10 @@ export async function POST(req: Request) {
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
 
     const expires_at = new Date(Date.now() + 5 * 60 * 1000)
+    const emailFrom = process.env.EMAIL_FROM
+    if (!emailFrom) {
+      throw new Error("EMAIL_FROM environment variable is not set")
+    }
 
     // delete old OTPs (important)
     await supabase.from("otp_verifications").delete().eq("email", email)
@@ -52,12 +56,12 @@ export async function POST(req: Request) {
     })
 
     await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: emailFrom,
       to: email,
-      subject: "Your OTP Code",
-      html: `<h2>${otp}</h2><p>Valid for 5 minutes</p>`
+      subject: "Your OTP Code for ConnectLoans",
+      html: `<h2>${otp}</h2><br/><p>Valid for 5 minutes</p>`
     })
-
+    console.log(otp, email, "sendotp");
     return Response.json({ success: true })
 
   } catch (err) {

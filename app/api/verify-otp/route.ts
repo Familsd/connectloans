@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       return Response.json({ valid: false, message: "No OTP found" })
     }
 
-    // 🔴 attempts check
+    //  attempts check
     if (data.attempts >= 3) {
       return Response.json({
         valid: false,
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       })
     }
 
-    // 🔴 expiry check
+    //  expiry check
     if (new Date(data.expires_at) < new Date()) {
       return Response.json({
         valid: false,
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       })
     }
 
-    // 🔴 wrong OTP
+    //  wrong OTP
     if (data.otp !== otp) {
       await supabase
         .from("otp_verifications")
@@ -48,13 +48,13 @@ export async function POST(req: Request) {
         message: `Incorrect OTP (${data.attempts + 1}/3)`
       })
     }
-
-    // ✅ success
+    console.log("otpvrify");
+    //  success
     await supabase
       .from("otp_verifications")
       .update({ verified: true })
       .eq("id", data.id)
-
+    console.log("otpvsuccess");
     return Response.json({ valid: true })
 
   } catch (err) {

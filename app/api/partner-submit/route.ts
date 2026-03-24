@@ -43,7 +43,7 @@ export async function POST(req: Request) {
                 : details.companyName
 
         const partner_id = await generatePartnerId(name)
-
+        console.log(partner_id, "idgen", email);
         await supabase.from("loan_applications").insert({
             partner_id,
             email,
