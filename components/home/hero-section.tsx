@@ -9,7 +9,7 @@ import { useCountAnimation } from "@/hooks/use-count-animation"
 const highlights = [
   "Fast Loan Processing",
   "Trusted Banking Partners",
- 
+
 ]
 
 
@@ -61,27 +61,29 @@ export function HeroSection() {
             </ul>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button asChild variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/30 bg-accent text-card hover:bg-accent/6 hover:text-accent h-12 px-6 w-full sm:w-auto">
+                <Link href="/services">
+                  Register as Partner
+                  {/* <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" /> */}
+                </Link>
+              </Button>
               <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 group shadow-lg shadow-primary/25 h-12 px-6 w-full sm:w-auto">
                 <Link href="/apply">
                   Apply Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary/30 text-primary hover:bg-primary/5 h-12 px-6 w-full sm:w-auto">
-                <Link href="/services">
-                  Explore Services
-                </Link>
-              </Button>
+              
             </div>
           </div>
 
           <div className={`relative ${isVisible ? "animate-slide-in-right animation-delay-300" : "opacity-0"}`}>
-            
+
             <img
               src="/images/serv (7).png"
               alt="Why Choose Us"
-               className="w-full rounded-2xl "
-              // className="w-full rounded-2xl shadow-lg border border-border"
+              className="w-full rounded-2xl "
+            // className="w-full rounded-2xl shadow-lg border border-border"
             />
           </div>
         </div>

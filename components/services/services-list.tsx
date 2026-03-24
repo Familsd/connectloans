@@ -5,6 +5,16 @@ import { Home, MapPin, Building2, Landmark, Receipt, Briefcase, Banknote, ArrowR
 import { Button } from "@/components/ui/button"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
+import { DollarSign, Zap, Headphones, Layers, ShieldCheck } from "lucide-react"
+
+const phighlights = [
+  { text: "High Commission Payouts", icon: DollarSign },
+  { text: "Fast Approval Process", icon: Zap },
+  { text: "Dedicated Partner Support", icon: Headphones },
+  { text: "Multiple Loan Products", icon: Layers },
+  // { text: "Zero Joining Fee", icon: ShieldCheck },
+];
+
 const services = [
   {
     id: "housing",
@@ -296,6 +306,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       ref={ref}
       className={`py-16 scroll-mt-24 ${index !== 0 ? "border-border" : ""}`}
     >
+
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Mobile: Title first */}
         <div className={`lg:hidden w-full ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
@@ -375,8 +386,60 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 }
 
 export function ServicesList() {
+  //  const { ref, isVisible } = useScrollAnimation()
   return (
     <section className="py-12 bg-[#ffffff]">
+      <div className="grid md:grid-cols-2 items-center gap-12 max-w-6xl mx-auto px-6 lg:px-8 mb-16 flex border border-border/50 rounded-2xl shadow-sm shadow-primary/20 backdrop-blur-sm">
+
+        {/* LEFT IMAGE */}
+
+
+
+        <div className="p-8">
+          <p className="text-sm font-medium text-primary uppercase tracking-wider">
+            Partner Program
+          </p>
+
+          <h3 className="mt-2 text-2xl font-semibold text-foreground">
+            Join Our Partner Network
+          </h3>
+
+          <p className="mt-3 text-muted-foreground text-sm leading-relaxed">
+            Become a part of a structured and reliable loan distribution ecosystem.
+            Access verified opportunities, streamlined processes, and dedicated support
+            designed to help you operate with confidence and consistency.
+          </p>
+
+          <div className="mt-12 flex flex-wrap justify-start gap-2 animate-fade-in-up animation-delay-200">
+            {phighlights.map((item) => (
+              <div
+                key={item.text}
+                className="flex items-center gap-1 bg-primary/5 backdrop-blur-sm rounded-md px-4 py-3"
+              >
+                <item.icon className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-muted-foreground">
+                  {item.text}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5">
+            <a
+              href="/partner"
+              className="inline-flex bg-primary items-center text-sm font-medium text-card border border-primary rounded-md px-4 py-2 hover:bg-card/10 transition-colors duration-300 group shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/30 hover:text-primary"
+            >
+              Register as a Partner →
+            </a>
+          </div>
+        </div>
+        <div className="h-full">
+          <img
+            src="/images/ser (3).jpg"
+            alt="Partner Program"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {services.map((service, index) => (
           <ServiceCard key={service.id} service={service} index={index} />

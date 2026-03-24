@@ -115,7 +115,7 @@ export function WhyChooseSection() {
       description: "Satisfied customers served",
     },
     {
-      value: 25,
+      value: 180,
       suffix: "+",
       label: "Banking Partners",
       icon: BankBuildingIcon,

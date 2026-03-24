@@ -21,7 +21,7 @@ export function ServicesHero() {
           </h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
             From dream homes to business expansion, we connect you with the right financing solutions. 
-            Our expert consultants work with 25+ banking partners to find the best rates and terms for your unique situation.
+            Our expert consultants work with 180+ banking partners to find the best rates and terms for your unique situation.
           </p>
         </div>
       </div>

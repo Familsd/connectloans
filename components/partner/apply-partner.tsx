@@ -32,6 +32,7 @@ export function PartnerApplicationForm() {
     const [otp, setOtp] = useState("")
     const [otpSent, setOtpSent] = useState(false)
     const [error, setError] = useState("")
+    const [success, setSuccess] = useState(false)
     const [cooldown, setCooldown] = useState(0)
     const [attempts, setAttempts] = useState(0)
 
@@ -142,10 +143,11 @@ export function PartnerApplicationForm() {
             })
 
             const data = await res.json()
-            console.log(data, res, "submit");
+
+
             if (!data.success) throw new Error("Submission failed")
 
-            alert(`Partner ID: ${data.partner_id}`)
+            setSuccess(true)
         } catch (err: any) {
             setError(err.message)
         } finally {
@@ -196,159 +198,171 @@ export function PartnerApplicationForm() {
                         </div>
 
                         {/* FORM BODY (FIXED HEIGHT AREA) */}
-                        <div className="mt-6 flex-1 flex flex-col justify-center">
+                        {success ? (
+                            <div className="flex flex-col items-center justify-center text-center h-full">
+                                <h2 className="text-2xl font-bold text-primary">Thank You!</h2>
+                                <p className="mt-3 text-muted-foreground max-w-sm">
+                                    Your application has been submitted successfully.
+                                    Our team will review your details and get back to you soon.
+                                </p>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="mt-6 flex-1 flex flex-col justify-center">
 
-                            {step === 1 && (
-                                <div className="grid gap-5">
-                                    <Input
-                                        placeholder="Enter email"
-                                        value={formData.email}
-                                        onChange={(e) => handleChange("email", e.target.value)}
-                                    />
-
-                                    <Input
-                                        placeholder="Enter phone"
-                                        maxLength={10}
-                                        value={formData.phone}
-                                        onChange={(e) =>
-                                            handleChange("phone", e.target.value.replace(/\D/g, ""))
-                                        }
-                                    />
-
-                                    {!otpSent ? (
-                                        <Button onClick={sendOtp} disabled={sendingOtp}>
-                                            {sendingOtp ? <Loader2 className="animate-spin" /> : "Send OTP"}
-                                        </Button>
-                                    ) : (
-                                        <>
+                                    {step === 1 && (
+                                        <div className="grid gap-5">
                                             <Input
-                                                placeholder="Enter OTP"
-                                                onChange={(e) => setOtp(e.target.value)}
+                                                placeholder="Enter email"
+                                                value={formData.email}
+                                                onChange={(e) => handleChange("email", e.target.value)}
                                             />
 
-                                            <Button onClick={verifyOtp} disabled={verifyingOtp}>
-                                                {verifyingOtp ? <Loader2 className="animate-spin" /> : "Verify OTP"}
-                                            </Button>
-                                        </>
+                                            <Input
+                                                placeholder="Enter phone"
+                                                maxLength={10}
+                                                value={formData.phone}
+                                                onChange={(e) =>
+                                                    handleChange("phone", e.target.value.replace(/\D/g, ""))
+                                                }
+                                            />
+
+                                            {!otpSent ? (
+                                                <Button onClick={sendOtp} disabled={sendingOtp}>
+                                                    {sendingOtp ? <Loader2 className="animate-spin" /> : "Send OTP"}
+                                                </Button>
+                                            ) : (
+                                                <>
+                                                    <Input
+                                                        placeholder="Enter OTP"
+                                                        onChange={(e) => setOtp(e.target.value)}
+                                                    />
+
+                                                    <Button onClick={verifyOtp} disabled={verifyingOtp}>
+                                                        {verifyingOtp ? <Loader2 className="animate-spin" /> : "Verify OTP"}
+                                                    </Button>
+                                                </>
+                                            )}
+                                        </div>
                                     )}
+
+                                    {step === 2 && (
+                                        <div className="grid gap-5">
+
+                                            <div className="flex gap-3">
+                                                <Button
+                                                    variant={formData.type === "individual" ? "default" : "outline"}
+                                                    onClick={() =>
+                                                        setFormData({ ...formData, type: "individual", details: {} })
+                                                    }
+                                                >
+                                                    Individual
+                                                </Button>
+
+                                                <Button
+                                                    variant={formData.type === "firm" ? "default" : "outline"}
+                                                    onClick={() =>
+                                                        setFormData({ ...formData, type: "firm", details: {} })
+                                                    }
+                                                >
+                                                    Firm
+                                                </Button>
+                                            </div>
+
+                                            {formData.type === "individual" && (
+                                                <>
+                                                    <Input placeholder="Name as per PAN"
+                                                        onChange={(e) => handleDetailChange("name", e.target.value)} />
+
+                                                    <Input placeholder="PAN"
+                                                        onChange={(e) => handleDetailChange("pan", e.target.value)} />
+
+                                                    <Input placeholder="Address"
+                                                        onChange={(e) => handleDetailChange("address", e.target.value)} />
+
+                                                    <Input placeholder="Pincode"
+                                                        onChange={(e) => handleDetailChange("pincode", e.target.value)} />
+                                                </>
+                                            )}
+
+                                            {formData.type === "firm" && (
+                                                <>
+                                                    <Select onValueChange={(v) => handleDetailChange("firmType", v)}>
+                                                        <SelectTrigger className="w-[250px]">
+                                                            <SelectValue placeholder="Select firm type" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectItem value="pvt_ltd">Pvt Ltd</SelectItem>
+                                                            <SelectItem value="llp">LLP</SelectItem>
+                                                            <SelectItem value="proprietorship">Proprietorship</SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
+
+                                                    <Input placeholder="Company Name"
+                                                        onChange={(e) => handleDetailChange("companyName", e.target.value)} />
+
+                                                    <Input placeholder="Company PAN"
+                                                        onChange={(e) => handleDetailChange("pan", e.target.value)} />
+
+                                                    <Input placeholder="Address"
+                                                        onChange={(e) => handleDetailChange("address", e.target.value)} />
+
+                                                    <Input placeholder="Pincode"
+                                                        onChange={(e) => handleDetailChange("pincode", e.target.value)} />
+                                                </>
+                                            )}
+
+                                        </div>
+                                    )}
+
                                 </div>
-                            )}
-
-                            {step === 2 && (
-                                <div className="grid gap-5">
-
-                                    <div className="flex gap-3">
-                                        <Button
-                                            variant={formData.type === "individual" ? "default" : "outline"}
-                                            onClick={() =>
-                                                setFormData({ ...formData, type: "individual", details: {} })
-                                            }
-                                        >
-                                            Individual
-                                        </Button>
-
-                                        <Button
-                                            variant={formData.type === "firm" ? "default" : "outline"}
-                                            onClick={() =>
-                                                setFormData({ ...formData, type: "firm", details: {} })
-                                            }
-                                        >
-                                            Firm
-                                        </Button>
+                                {step === 2 && (
+                                    <div className="flex items-center gap-2 mt-4">
+                                        <input
+                                            type="checkbox"
+                                            checked={agreed}
+                                            onChange={(e) => setAgreed(e.target.checked)}
+                                        />
+                                        <span className="text-sm">
+                                            I agree to the Terms & Conditions
+                                        </span>
                                     </div>
+                                )}
+                                {/* FOOTER BUTTONS */}
+                                <div className="mt-6 flex justify-between items-center">
 
-                                    {formData.type === "individual" && (
-                                        <>
-                                            <Input placeholder="Name as per PAN"
-                                                onChange={(e) => handleDetailChange("name", e.target.value)} />
-
-                                            <Input placeholder="PAN"
-                                                onChange={(e) => handleDetailChange("pan", e.target.value)} />
-
-                                            <Input placeholder="Address"
-                                                onChange={(e) => handleDetailChange("address", e.target.value)} />
-
-                                            <Input placeholder="Pincode"
-                                                onChange={(e) => handleDetailChange("pincode", e.target.value)} />
-                                        </>
+                                    {/* BACK only in step 2 */}
+                                    {step === 2 ? (
+                                        <Button variant="outline" onClick={() => setStep(1)}>
+                                            Back
+                                        </Button>
+                                    ) : (
+                                        <div /> // keeps spacing stable
                                     )}
 
-                                    {formData.type === "firm" && (
-                                        <>
-                                            <Select onValueChange={(v) => handleDetailChange("firmType", v)}>
-                                                <SelectTrigger className="w-[250px]">
-                                                    <SelectValue placeholder="Select firm type" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="pvt_ltd">Pvt Ltd</SelectItem>
-                                                    <SelectItem value="llp">LLP</SelectItem>
-                                                    <SelectItem value="proprietorship">Proprietorship</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-
-                                            <Input placeholder="Company Name"
-                                                onChange={(e) => handleDetailChange("companyName", e.target.value)} />
-
-                                            <Input placeholder="Company PAN"
-                                                onChange={(e) => handleDetailChange("pan", e.target.value)} />
-
-                                            <Input placeholder="Address"
-                                                onChange={(e) => handleDetailChange("address", e.target.value)} />
-
-                                            <Input placeholder="Pincode"
-                                                onChange={(e) => handleDetailChange("pincode", e.target.value)} />
-                                        </>
-                                    )}
-
-                                </div>
-                            )}
-
-                        </div>
-                        {step === 2 && (
-                            <div className="flex items-center gap-2 mt-4">
-                                <input
-                                    type="checkbox"
-                                    checked={agreed}
-                                    onChange={(e) => setAgreed(e.target.checked)}
-                                />
-                                <span className="text-sm">
-                                    I agree to the Terms & Conditions
-                                </span>
-                            </div>
-                        )}
-                        {/* FOOTER BUTTONS */}
-                        <div className="mt-6 flex justify-between items-center">
-
-                            {/* BACK only in step 2 */}
-                            {step === 2 ? (
-                                <Button variant="outline" onClick={() => setStep(1)}>
-                                    Back
-                                </Button>
-                            ) : (
-                                <div /> // keeps spacing stable
-                            )}
-
-                            {/* PRIMARY ACTION BUTTON */}
-                            {/* {step === 1 && !otpSent && (
+                                    {/* PRIMARY ACTION BUTTON */}
+                                    {/* {step === 1 && !otpSent && (
                                 <Button onClick={sendOtp} disabled={sendingOtp}>
                                     {sendingOtp ? <Loader2 className="animate-spin" /> : "Send OTP"}
                                 </Button>
                             )} */}
 
-                            {/* {step === 1 && otpSent && (
+                                    {/* {step === 1 && otpSent && (
                                 <Button onClick={verifyOtp} disabled={verifyingOtp}>
                                     {verifyingOtp ? <Loader2 className="animate-spin" /> : "Verify OTP"}
                                 </Button>
                             )} */}
 
-                            {step === 2 && (
-                                <Button onClick={handleSubmit} disabled={submitting}>
-                                    {submitting ? <Loader2 className="animate-spin" /> : "Submit Application"}
-                                </Button>
-                            )}
+                                    {step === 2 && (
+                                        <Button onClick={handleSubmit} disabled={submitting}>
+                                            {submitting ? <Loader2 className="animate-spin" /> : "Submit Application"}
+                                        </Button>
+                                    )}
 
-                        </div>
+                                </div>
 
+                            </>
+                        )}
                         {/* ERROR */}
                         {error && (
                             <p className="text-destructive text-sm mt-3">{error}</p>

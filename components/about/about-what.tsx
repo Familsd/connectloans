@@ -79,7 +79,7 @@ export function AboutWhat() {
                         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
                             As a loan consultancy firm, we specialize in:</p>
 
-                        <p className="mt-4 text-lg text-muted-foreground leading-relaxed mt-8">With over 15 years of experience in the financial services industry, we have built strong relationships with more than 50 banks and NBFCs, enabling us to offer our clients competitive interest rates and flexible loan terms.</p>
+                        <p className="mt-4 text-lg text-muted-foreground leading-relaxed mt-8">With over 15 years of experience in the financial services industry, we have built strong relationships with more than 180 banks and NBFCs, enabling us to offer our clients competitive interest rates and flexible loan terms.</p>
 
                         <div className="mt-10 space-y-6">
                             {features.map((feature, index) => (
