@@ -98,11 +98,13 @@ export async function POST(req: Request) {
                 subject: "New Partner Application",
                 html: `
     <h3>New Application Received</h3>
+    <p><b>Partner ID :</b> ${partner_id}</p>
     <p><b>Email:</b> ${email}</p>
     <p><b>Phone:</b> ${phone}</p>
     <p><b>Type:</b> ${type}</p>
+    <p><b>PAN:</b> ${details.pan || null}</p>
+    </b>
     <p><b>Details:</b> ${JSON.stringify(details)}</p>
-    <p><b>Partner ID (internal):</b> ${partner_id}</p>
   `
             })
         } catch (emailErr) {
