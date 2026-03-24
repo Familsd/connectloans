@@ -136,7 +136,7 @@ export function PartnerApplicationForm() {
         setSubmitting(true)
 
         try {
-            const res = await fetch("/api/submit-loan", {
+            const res = await fetch("/api/partner-submit", {
                 method: "POST",
                 body: JSON.stringify(formData),
             })
@@ -165,7 +165,7 @@ export function PartnerApplicationForm() {
                             src="/images/ser (6).jpg"
                             alt="Partner"
 
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-contain"
                         />
                     </div>
 
@@ -276,12 +276,13 @@ export function PartnerApplicationForm() {
                                     {formData.type === "firm" && (
                                         <>
                                             <Select onValueChange={(v) => handleDetailChange("firmType", v)}>
-                                                <SelectTrigger>
+                                                <SelectTrigger className="w-[250px]">
                                                     <SelectValue placeholder="Select firm type" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="pvt_ltd">Pvt Ltd</SelectItem>
                                                     <SelectItem value="llp">LLP</SelectItem>
+                                                    <SelectItem value="proprietorship">Proprietorship</SelectItem>
                                                 </SelectContent>
                                             </Select>
 
