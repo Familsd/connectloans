@@ -62,7 +62,7 @@ export function HeroSection() {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button asChild variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/30 bg-accent text-card hover:bg-accent/6 hover:text-accent h-12 px-6 w-full sm:w-auto">
-                <Link href="/services">
+                <Link href="/partner">
                   Register as Partner
                   {/* <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" /> */}
                 </Link>

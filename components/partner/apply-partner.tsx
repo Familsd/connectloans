@@ -234,7 +234,7 @@ export function PartnerApplicationForm() {
                                             ) : (
                                                 <>
                                                     <Input
-                                                        placeholder="Enter OTP"
+                                                        placeholder="Enter OTP Recieved to your email"
                                                         onChange={(e) => setOtp(e.target.value)}
                                                     />
 

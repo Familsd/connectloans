@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <section className="py-24 bg-secondary">
           <div className="mx-auto max-w-4xl px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-sm font-medium text-accent uppercase tracking-wider">Legal</p>
+              <p className="text-sm font-medium text-primary uppercase tracking-wider">Legal</p>
               <h1 className="mt-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
                 Privacy Policy
               </h1>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
                 <div>
                   <h2 className="text-2xl font-bold text-foreground mb-4">1. Introduction</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Connect Loans (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. 
+                    Connect Loans is committed to protecting your privacy. 
                     This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
                     when you visit our website or use our loan consultancy services.
                   </p>
@@ -124,7 +124,7 @@ export default function PrivacyPage() {
                   <p className="text-muted-foreground leading-relaxed">
                     We may update this Privacy Policy from time to time. We will notify you of any 
                     significant changes by posting the new policy on this page and updating the 
-                    &quot;Last updated&quot; date.
+                     date.
                   </p>
                 </div>
                 
@@ -135,9 +135,9 @@ export default function PrivacyPage() {
                     contact us at:
                   </p>
                   <div className="mt-4 text-muted-foreground">
-                    <p>Email: privacy@connectloans.com</p>
+                    <p>Email: contact@connectloans.in</p>
                     <p>Phone: +91 99665 20005</p>
-                    <p>Address: 123 Financial District, Business Tower, Mumbai, India - 400001</p>
+                    <p>Address: <br /> 8-3-231/W/35/G1, SHANTHI KUTEER APTS, Yousufguda, Khairatabad,<br /> Hyderabad- 500045, Telangana</p>
                   </div>
                 </div>
               </div>

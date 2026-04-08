@@ -15,7 +15,7 @@ export default function TermsPage() {
         <section className="py-24 bg-secondary">
           <div className="mx-auto max-w-4xl px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-sm font-medium text-accent uppercase tracking-wider">Legal</p>
+              <p className="text-sm font-medium text-primary uppercase tracking-wider">Legal</p>
               <h1 className="mt-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
                 Terms of Use
               </h1>
@@ -121,7 +121,7 @@ export default function TermsPage() {
                   <p className="text-muted-foreground leading-relaxed">
                     These Terms of Use are governed by the laws of India. Any disputes arising from 
                     the use of our services shall be subject to the exclusive jurisdiction of the 
-                    courts in Mumbai, Maharashtra.
+                    courts in Hyderabad, Telangana.
                   </p>
                 </div>
                 
@@ -134,17 +134,7 @@ export default function TermsPage() {
                   </p>
                 </div>
                 
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-4">11. Contact Information</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    For questions about these Terms of Use, please contact us at:
-                  </p>
-                  <div className="mt-4 text-muted-foreground">
-                    <p>Email: legal@connectloans.com</p>
-                    <p>Phone: +91 99665 20005</p>
-                    <p>Address: 123 Financial District, Business Tower, Mumbai, India - 400001</p>
-                  </div>
-                </div>
+               
               </div>
             </div>
           </div>
